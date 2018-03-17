@@ -1,0 +1,40 @@
+<div class="create-container">
+  <div class="create-card">
+    <div class="create-column">
+      <img id="created-image" src="" />
+    </div>
+    <div class="divider">
+    </div>
+    <div class="create-column">
+      <!-- Add your title code here: -->
+      <div id="title">Create</div>
+      <form class="input-form" action="/items/create" method="post" >
+        <!-- Add your form elements here -->
+        {{#with newItem.errors.title as |error|}}
+          <span class="error">{{error.message}}</span>
+        {{/with}}
+        <input id="title-input" name="title" type="text" value="{{newItem.title}}">
+        {{#with newItem.errors.description as |error|}}
+          <span class="error">{{error.message}}</span>
+        {{/with}}
+        <textarea id="description-input" name="description" value="{{newItem.description}}">{{newItem.description}}</textarea>
+        {{#with newItem.errors.imageUrl as |error|}}
+          <span class="error">{{error.message}}</span>
+        {{/with}}
+        <input id="imageUrl-input" name="imageUrl" type="text" value="{{newItem.imageUrl}}">
+
+        <button id="submit-button" type="submit">
+          <p>button text</p>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+<script>
+  var img = document.getElementById('created-image');
+  function handleChange(e) {
+    var path = e.target.value.match(/^(https*:\/\/)/i) ? '' : 'http://';
+    img.src = path + e.target.value;
+  }
+  document.getElementById('imageUrl-input').oninput = handleChange;
+</script>
